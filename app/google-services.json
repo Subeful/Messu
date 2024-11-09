@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "933597473254",
+    "project_id": "messu-5f0a1",
+    "storage_bucket": "messu-5f0a1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933597473254:android:7f06ebacfdd48761830e27",
+        "android_client_info": {
+          "package_name": "com.subefu.messu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZFqYw3Hl-tXk-q7IYcByWoBCqW_fQQ9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

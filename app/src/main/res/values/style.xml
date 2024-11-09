@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="textSemyBold">
+        <item name="android:textSize">28sp</item>
+        <item name="fontFamily">@font/readex_pro_semibold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>
