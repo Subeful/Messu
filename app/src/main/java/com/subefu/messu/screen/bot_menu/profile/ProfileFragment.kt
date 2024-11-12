@@ -26,6 +26,8 @@ import com.subefu.messu.utils.ChatUtil.createChat
 import com.subefu.messu.utils.ChatUtil.generateChatId
 import com.subefu.messu.utils.SetFragment
 import com.subefu.messu.utils.UpdateFragment
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class ProfileFragment : Fragment() {
@@ -41,29 +43,27 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        binding.ibProfileLogOut.setOnClickListener {
-            alert = AlertDialog.Builder(container!!.context)
-                .setTitle("${getString(R.string.logout)}?")
-                .setPositiveButton(getString(R.string.yes), object : DialogInterface.OnClickListener{
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
-                        FirebaseAuth.getInstance().signOut()
-                        startActivity(Intent(context, LoginActivity::class.java))
-                    }
-                }).setNegativeButton(getString(R.string.no), object : DialogInterface.OnClickListener{
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
-                        return
-                    }
-                })
-            alert.create().show()
-        }
+        init(inflater)
 
-        binding.lnProfileLanguage.setOnClickListener {
-            chooseLanguage(inflater.context, it)
-        }
-        binding.lnProfileAskAdmin.setOnClickListener {
-            askAdmin(inflater.context)
-        }
+        binding.ibProfileLogOut.setOnClickListener { logout(container) }
 
+        binding.lnProfileLanguage.setOnClickListener { chooseLanguage(inflater.context, it) }
+        binding.lnProfileAskAdmin.setOnClickListener { askAdmin(inflater.context) }
+
+        return binding.root
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        functionUpdateFragment = context as UpdateFragment
+        functionChangeFragment = context as SetFragment
+    }
+
+    fun init(inflater: LayoutInflater){
+        setName()
+        languagePreferences = inflater.context.getSharedPreferences("language", Context.MODE_PRIVATE)
+    }
+
+    fun setName(){
         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -71,28 +71,38 @@ class ProfileFragment : Fragment() {
                 }
                 override fun onCancelled(error: DatabaseError) {}
             })
-
-        languagePreferences = inflater.context.getSharedPreferences("language", Context.MODE_PRIVATE)
-
-        setLanguage(inflater.context)
-        return binding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        functionUpdateFragment = context as UpdateFragment
-        functionChangeFragment = context as SetFragment
+    fun logout(container: ViewGroup?){
+        alert = AlertDialog.Builder(container!!.context)
+            .setTitle("${getString(R.string.logout)}?")
+            .setPositiveButton(getString(R.string.yes), object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    setLastEntrance()
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(context, LoginActivity::class.java))
+                }
+            }).setNegativeButton(getString(R.string.no), object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    return
+                }
+            })
+        alert.create().show()
     }
 
-    fun setLanguage(context: Context){
-        val language = context.getSharedPreferences("language", Context.MODE_PRIVATE)?.getString("language", "en")
-
-        val locale = Locale(language.toString())
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.locale = locale
-        resources.updateConfiguration(config, resources.displayMetrics)
+    fun setLastEntrance(){
+        val date = getCurrentDate()
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("status").setValue(date)
     }
+
+    fun getCurrentDate():String{
+        val format = SimpleDateFormat("HH:mm dd.MM.yy")
+        val date = format.format(Date().time)
+        return date
+    }
+
+
 
     @SuppressLint("MissingInflatedId")
     fun chooseLanguage(context: Context, v: View?) {
@@ -126,7 +136,6 @@ class ProfileFragment : Fragment() {
             .setPositiveButton(context?.getString(R.string.yes), object : DialogInterface.OnClickListener{
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     editor.putString("language", language).apply()
-                    setLanguage(context)
                     functionUpdateFragment.updateFragment(ProfileFragment())
                     return
                 }

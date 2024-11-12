@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/alert_choose_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/png_animal_1"/>
+        <ImageView
+            android:id="@+id/alert_choose_3"
+            android:layout_width="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="80dp"
+            android:background="@drawable/png_animal_2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/alert_choose_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/png_animal_3"/>
+        <ImageView
+            android:id="@+id/alert_choose_4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/png_animal_4"/>
+    </LinearLayout>
+
+
+</LinearLayout>

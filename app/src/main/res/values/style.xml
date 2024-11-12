@@ -6,4 +6,27 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+    <style name="AppTheme.Light" parent="AppTheme">
+        <item name="colorPrimary">@color/light_grey</item>
+        <item name="colorPrimaryVariant">@color/light_grey</item>
+        <item name="colorOnPrimary">@color/light_grey</item>
+        <item name="colorSecondary">@color/light_grey</item>
+        <item name="colorOnSecondary">@color/light_grey</item>
+    </style>
+    <style name="AppTheme.Dark" parent="AppTheme">
+        <item name="colorPrimary">@color/dark_grey</item>
+        <item name="colorPrimaryVariant">@color/dark_grey</item>
+        <item name="colorOnPrimary">@color/dark_grey</item>
+        <item name="colorSecondary">@color/dark_grey</item>
+        <item name="colorOnSecondary">@color/dark_grey</item>
+    </style>
 </resources>

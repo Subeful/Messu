@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.subefu.messu.R
 import com.subefu.messu.utils.MessageModel
 
@@ -23,6 +25,10 @@ class MessageAdapter(val context: Context, val listMessage: List<MessageModel>)
 
         holder.text.text = message.text
         holder.timeSend.text = message.timeSend
+        holder.check.setBackgroundResource(
+            if(listMessage[position].isLook == "no") R.drawable.vc_chek_1
+            else R.drawable.vc_chek_2
+        )
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -35,11 +41,13 @@ class MessageAdapter(val context: Context, val listMessage: List<MessageModel>)
     override fun getItemCount() = listMessage.size
 
     class MessageViewHolder(view: View): RecyclerView.ViewHolder(view){
-        lateinit var text: TextView
-        lateinit var timeSend: TextView
+        var text: TextView
+        var timeSend: TextView
+        var check: ImageView
         init{
             text = view.findViewById(R.id.message_text)
             timeSend = view.findViewById(R.id.message_time)
+            check = view.findViewById(R.id.message_check)
         }
     }
 }

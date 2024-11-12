@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.subefu.messu.databinding.ActivityMainBinding
 import com.subefu.messu.screen.bot_menu.chats.ChatsFragment
 import com.subefu.messu.screen.bot_menu.new_chat.NewChatFragment
@@ -54,6 +55,9 @@ class MainActivity : AppCompatActivity(), SetFragment, UpdateFragment {
             finish()
             startActivity(Intent(this, LoginActivity::class.java))
         }
+        else{
+            setStatusOnline()
+        }
     }
 
     fun init(){
@@ -76,6 +80,11 @@ class MainActivity : AppCompatActivity(), SetFragment, UpdateFragment {
         val config = Configuration()
         config.locale = locale
         resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    fun setStatusOnline(){
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("status").setValue("Online")
     }
 
     override fun setOtherFragment(fragment: Fragment) {

@@ -34,13 +34,15 @@ class NewChatFragment : Fragment() {
         val listUsers = ArrayList<UserModel>()
 
         FirebaseDatabase.getInstance().getReference().child("Users")
-            .addListenerForSingleValueEvent(object : ValueEventListener {
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (user in snapshot.children) {
                         val name = user.child("username").getValue().toString()
                         val id = user.child("id").getValue().toString()
+                        val profileImage = user.child("image").getValue().toString()
+                        val status = user.child("status").getValue().toString()
                         if (!id.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
-                            listUsers.add(UserModel(id, name , ""))
+                            listUsers.add(UserModel(id, name , profileImage, status))
                         }
                     }
                     val rv = binding.rvNewChat

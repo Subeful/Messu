@@ -3,18 +3,22 @@ package com.subefu.messu.adapter
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.subefu.messu.R
 import com.subefu.messu.screen.chat.ChatActivity
 import com.subefu.messu.utils.ChatModel
-import com.subefu.messu.utils.ChatUtil
 import com.subefu.messu.utils.ChatUtil.generateChatId
 
 
@@ -28,6 +32,8 @@ class ChatsAdapter(val context: Context?, val listChats: ArrayList<ChatModel>)
 
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
         holder.chatName.text = listChats[position].chatName
+        setLastMessageAndTime(holder, position)
+        setNoLookCount(holder, position)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
@@ -53,6 +59,41 @@ class ChatsAdapter(val context: Context?, val listChats: ArrayList<ChatModel>)
             })
         alert.create().show()
     }
+    fun setLastMessageAndTime(holder: ChatsViewHolder, position: Int){
+        FirebaseDatabase.getInstance().getReference().child("Chats").child(listChats[position].id).child("message")
+            .orderByKey().limitToLast(1).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (snapshot in dataSnapshot.children) {
+                        val message = snapshot.child("text").value.toString()
+                        val time = snapshot.child("time").value.toString()
+                        holder.chatMessage.setText(message)
+                        holder.chatTime.setText(time)
+                        Log.d("LastMessage", message)
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("FirebaseError", "loadPost:onCancelled", databaseError.toException())
+                }
+            })
+    }
+
+    fun setNoLookCount(holder: ChatsViewHolder, position: Int) {
+        FirebaseDatabase.getInstance().getReference().child("Chats").child(listChats[position].id).child("message")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var count = 0
+                    for (snapshot in dataSnapshot.children) {
+                        if(snapshot.child("isLook").value.toString() == "no" &&
+                            snapshot.child("uid").value.toString() != FirebaseAuth.getInstance().currentUser!!.uid)
+                            count++
+                    }
+                    holder.chatCount.setText(count.toString())
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w("FirebaseError", "loadPost:onCancelled", databaseError.toException())
+                }
+            })
+    }
     fun deleteChat(fid: String){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid.toString()
         val supposedChatId: String = generateChatId(fid, uid)
@@ -67,8 +108,14 @@ class ChatsAdapter(val context: Context?, val listChats: ArrayList<ChatModel>)
 
     class ChatsViewHolder(view: View): RecyclerView.ViewHolder(view){
         var chatName: TextView
+        var chatMessage: TextView
+        var chatTime: TextView
+        var chatCount: TextView
         init {
             chatName = view.findViewById(R.id.model_chat_name)
+            chatMessage = view.findViewById(R.id.model_chat_message)
+            chatTime = view.findViewById(R.id.model_chat_message_time)
+            chatCount = view.findViewById(R.id.model_chat_message_count)
         }
     }
 }
