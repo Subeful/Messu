@@ -13,6 +13,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="80dp"
         android:src="@drawable/vc_profile"
+        app:civ_border_color="@color/dark"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,9 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/readex_pro_bold"
-        android:text="User #32652934"
-        android:textColor="@color/black"
-        android:textSize="24dp"
+        android:text=""
+        android:textColor="@color/dark"
+        android:textSize="24sp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/im_profile_ava"
         app:layout_constraintStart_toStartOf="@+id/im_profile_ava"
@@ -41,5 +42,161 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="7dp"
+        android:background="@drawable/shape_profile_mode"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_ed_txt_chat">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:layout_marginStart="9dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/readex_pro"
+                android:text="@string/settings"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:ignore="SpUsage,TextSizeCheck" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/vc_set_config"
+                android:contentDescription="@string/app_name"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_profile_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_ed_txt_chat">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:layout_marginStart="9dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/readex_pro"
+                android:text="@string/language"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:ignore="TextSizeCheck" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/vc_set_config"
+                android:contentDescription="@string/app_name"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_ed_txt_chat">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:layout_marginStart="9dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/readex_pro"
+                android:text="@string/personalization"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:ignore="TextSizeCheck" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/vc_set_config"
+                android:contentDescription="@string/app_name"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_ed_txt_chat">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:layout_marginStart="9dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/readex_pro"
+                android:text="@string/statistics"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:ignore="TextSizeCheck" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/vc_set_config"
+                android:contentDescription="@string/app_name"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_profile_askAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_ed_txt_chat">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:layout_marginStart="9dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/readex_pro"
+                android:text="@string/ask_question"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:ignore="TextSizeCheck" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/vc_set_config"
+                android:contentDescription="@string/app_name"
+                tools:ignore="TouchTargetSizeCheck" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

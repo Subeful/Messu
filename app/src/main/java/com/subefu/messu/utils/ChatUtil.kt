@@ -1,54 +1,60 @@
 package com.subefu.messu.utils
 
-import com.google.android.gms.tasks.Task
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.subefu.messu.R
 import java.util.Arrays
 
 
 object ChatUtil {
-    fun createChat(user: UserModel) {
-        val uid: String = FirebaseAuth.getInstance().currentUser?.getUid() ?: "null"
 
+    fun createChat(context: Context?, userId: String){
+        val uid: String = FirebaseAuth.getInstance().currentUser?.getUid() ?: "null"
         if(uid == "null") return
 
-        val chatInfo = hashMapOf("user1" to uid, "user2" to user.id)
+        val chatInfo = mapOf("user1" to uid, "user2" to userId)
+        val chatId: String = generateChatId(uid, userId)
 
-        val chatId: String = generateChatId(uid, user.id)
-        FirebaseDatabase.getInstance().reference.child("Chats").child(chatId)
-            .setValue(chatInfo)
+        FirebaseDatabase.getInstance().getReference().child("Chats").child(chatId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Toast.makeText(context, "Chat already exist", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "Chat created", Toast.LENGTH_SHORT).show()
 
-        addChatIdToUser(uid, chatId)
-        addChatIdToUser(user.id, chatId)
+                        FirebaseDatabase.getInstance().reference.child("Chats").child(chatId)
+                            .setValue(chatInfo)
+
+                        addChatIdToUser(uid, chatId)
+                        addChatIdToUser(userId, chatId)
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(context, "error database", Toast.LENGTH_SHORT).show()
+                    Log.e("Firebase", "Ошибка при чтении данных: " + databaseError.message)
+                }
+            })
     }
 
-    private fun generateChatId(userId1: String, userId2: String): String {
-        val sumUser1User2 = userId1 + userId2
-        val charArray = sumUser1User2.toCharArray()
+
+    fun generateChatId(userId1: String, userId2: String): String {
+        val charArray = (userId1 + userId2).toCharArray()
         Arrays.sort(charArray)
 
         return String(charArray)
     }
 
     private fun addChatIdToUser(uid: String, chatId: String) {
-        FirebaseDatabase.getInstance().reference.child("Users").child(uid)
-            .child("chats").get()
-            .addOnCompleteListener { task: Task<DataSnapshot> ->
-                if (task.isSuccessful) {
-                    val chats = task.result.value.toString()
-                    val chatsUpd: String = addIdToStr(chats, chatId)
+        FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("chats")
+            .child(chatId).setValue(mapOf("chat_id" to chatId))
 
-                    FirebaseDatabase.getInstance().reference.child("Users").child(uid)
-                        .child("chats").setValue(chatsUpd)
-                }
-            }
     }
 
-    private fun addIdToStr(str: String, chatId: String): String {
-        var str = str
-        str += if ((str.isEmpty())) chatId else (",$chatId")
-
-        return str
-    }
 }

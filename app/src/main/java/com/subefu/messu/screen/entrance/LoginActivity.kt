@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
             if(email.isEmpty() || password.isEmpty())
                 Toast.makeText(context, "Field can't be empty", Toast.LENGTH_SHORT).show()
-            else if(email.length < 7 || password.length < 4)
+            else if(email.length < 5 || password.length < 4)
                 Toast.makeText(context, "Field can't be that short", Toast.LENGTH_SHORT).show()
             else{
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
@@ -45,12 +45,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.lnLoginSignUp.setOnClickListener {
-            startActivity(Intent(context, SignUpActivity::class.java))
+            val intent = Intent(context, SignUpActivity::class.java)
+            intent.putExtra("user_mail", binding.etLoginEmail.text.toString())
+            intent.putExtra("user_password", binding.etLoginPassword.text.toString())
+            startActivity(intent)
+
         }
 
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         finishAffinity()
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Messu</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="login">Авторизоваться</string>
+    <string name="logout">Выйти</string>
+
+    <string name="email">Почта</string>
+    <string name="username">Ник</string>
+    <string name="password">Пароль</string>
+
+    <string name="menu_chats">Чаты</string>
+    <string name="menu_new_chat">Новый чат</string>
+    <string name="menu_profile">Профиль</string>
+
+    <string name="personalization">Персонализация</string>
+    <string name="language">Язык</string>
+    <string name="statistics">Статистика</string>
+    <string name="settings">Настройки</string>
+    <string name="ask_question">Задать вопрос админу</string>
+
+    <string name="no_chat_1">Похоже, у вас еще нет ни одного чата.</string>
+    <string name="no_chat_2">Нажмите, чтобы создать.</string>
+
+    <string name="no_account_1">Впервые здесь?</string>
+    <string name="no_account_2">Зарегистрироваться</string>
+
+    <string name="user_net_status_online">В сети</string>
+    <string name="user_net_status_offline">Был(а) в сети в </string>
+
+    <string name="type_message">Введите сообщение...</string>
+    <string name="change_language">Хотите сменить язвк?</string>
+
+    <string name="english">Русский</string>
+    <string name="russian">Английский</string>
+
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <string name="create_chat">Чат создан</string>
+</resources>

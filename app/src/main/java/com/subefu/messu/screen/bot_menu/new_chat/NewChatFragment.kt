@@ -12,7 +12,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.subefu.messu.adapter.UserChatsAdapter
+import com.subefu.messu.adapter.NewChatsAdapter
 import com.subefu.messu.databinding.FragmentNewChatBinding
 import com.subefu.messu.utils.UserModel
 import java.util.ArrayList
@@ -48,7 +48,7 @@ class NewChatFragment : Fragment() {
                         DividerItemDecoration(context,
                             DividerItemDecoration.VERTICAL)
                     )
-                    rv.adapter = UserChatsAdapter(context, listUsers)
+                    rv.adapter = NewChatsAdapter(context, listUsers)
                 }
                 override fun onCancelled(error: DatabaseError) {
                     Log.d( "FirebaseError", "Error fetching data: ${error.message}")

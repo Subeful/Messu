@@ -11,8 +11,8 @@ import com.subefu.messu.utils.ChatUtil.createChat
 import com.subefu.messu.utils.UserModel
 
 
-class UserChatsAdapter(val context: Context?, val list: ArrayList<UserModel>)
-    : RecyclerView.Adapter<UserChatsAdapter.UserChatViewHolder>() {
+class NewChatsAdapter(val context: Context?, val list: ArrayList<UserModel>)
+    : RecyclerView.Adapter<NewChatsAdapter.UserChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserChatViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.model_user, parent, false)
@@ -25,7 +25,7 @@ class UserChatsAdapter(val context: Context?, val list: ArrayList<UserModel>)
         val user = list.get(position);
 
         holder.itemView.setOnClickListener { view ->
-            createChat(user)
+            createChat(context!!, user.id)
         }
     }
 

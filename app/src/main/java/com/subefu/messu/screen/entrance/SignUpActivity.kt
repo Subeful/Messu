@@ -23,7 +23,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        context = this
+        init()
 
         binding.btSignUpSignUp.setOnClickListener {
             val email = binding.etSignUpEmail.text.toString().trim()
@@ -54,8 +54,11 @@ class SignUpActivity : AppCompatActivity() {
                         startActivity(Intent(context, MainActivity::class.java))
                     }
                     else
-                        Toast.makeText(context, "Key is null", Toast.LENGTH_SHORT).show()
-                    }
+                        Toast.makeText(context, "Oh, we catch some error. Try again", Toast.LENGTH_LONG).show()
+                    }.addOnFailureListener{
+                        Toast.makeText(context, "Print trust data", Toast.LENGTH_SHORT).show()
+
+                }
             }
         }
 
@@ -63,5 +66,18 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+    fun init(){
+        context = this
+
+        setFieldIfNotNull()
+    }
+
+    fun setFieldIfNotNull(){
+        val mail = intent.getStringExtra("user_mail").toString()
+        val password = intent.getStringExtra("user_password").toString()
+
+        if(mail.isEmpty().not())    binding.etSignUpEmail.setText(mail)
+        if(password.isEmpty().not())    binding.etSignUpPassword.setText(password)
     }
 }

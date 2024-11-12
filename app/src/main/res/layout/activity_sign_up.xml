@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="53dp"
         android:layout_marginTop="10dp"
-        android:text="Sign up"
+        android:text="@string/sign_up"
         android:clickable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/im_sign_up" />
@@ -71,8 +71,9 @@
                 android:id="@+id/et_signUp_email"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:fontFamily="@font/readex_pro"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:layout_marginStart="7dp"
                 android:inputType="text"
                 android:textColor="@color/black" />
@@ -95,8 +96,9 @@
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:autofillHints=""
                 android:fontFamily="@font/readex_pro"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="text"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -117,11 +119,13 @@
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:autofillHints=""
                 android:fontFamily="@font/readex_pro"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="text"
                 android:clickable="false"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                tools:ignore="TextFields" />
         </LinearLayout>
 
     </LinearLayout>
@@ -133,9 +137,9 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/blue"
         android:fontFamily="@font/readex_pro"
-        android:text="Sign up"
+        android:text="@string/sign_up"
         android:textColor="@color/white"
-        android:textSize="17dp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

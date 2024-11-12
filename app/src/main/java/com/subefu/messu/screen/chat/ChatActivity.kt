@@ -3,7 +3,6 @@ package com.subefu.messu.screen.chat
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -40,6 +39,7 @@ class ChatActivity : AppCompatActivity() {
 
         binding.ibSend.setOnClickListener {
             val et_mes = binding.etChat
+            if(et_mes.text.toString().trim().isEmpty()) return@setOnClickListener
             sendMessage(et_mes.text.toString())
             et_mes.setText("")
         }
@@ -52,15 +52,10 @@ class ChatActivity : AppCompatActivity() {
 
     @SuppressLint("SimpleDateFormat")
     fun sendMessage(text: String){
-        Toast.makeText(this, "send...", Toast.LENGTH_SHORT).show()
         if(text.isEmpty()) return
 
         val time = SimpleDateFormat("HH:mm").format(Date())
-        val message = mapOf(
-            "uid" to mine_id,
-            "text" to text,
-            "time" to time
-        )
+        val message = mapOf("uid" to mine_id, "text" to text, "time" to time)
 
         FirebaseDatabase.getInstance().getReference().child("Chats").child(chatId).child("message")
             .push().setValue(message)
@@ -97,4 +92,5 @@ class ChatActivity : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {}
             })
     }
+
 }

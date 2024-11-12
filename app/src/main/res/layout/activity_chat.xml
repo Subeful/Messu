@@ -29,15 +29,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:autofillHints=""
+        android:background="@drawable/shape_ed_txt_chat"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:paddingTop="30dp"
-        android:background="@drawable/shape_ed_txt_chat"
-        android:hint="Type your message..."
-        android:padding="13dp"
+        android:hint="@string/type_message"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="#616161"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ib_send"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <ImageButton
         android:id="@+id/ib_send"
