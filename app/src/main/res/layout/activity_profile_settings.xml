@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.bot_menu.profile.ProfileSettingsActivity"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_ava"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/vc_profile"
+                    app:civ_border_color="@color/dark"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/settings_tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/readex_pro_bold"
+                    android:inputType="textMultiLine"
+                    android:maxWidth="220dp"
+                    android:text="ytunyu"
+                    android:textColor="@color/dark"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/im_profile_ava"
+                    app:layout_constraintTop_toTopOf="@+id/im_profile_ava" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/readex_pro_bold"
+                    android:text="@string/user"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/readex_pro"
+                    android:text="@string/username"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/settings_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="-4dp"
+                    android:background="@drawable/shape_ed_txt_chat"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/readex_pro"
+                    android:text="@string/email"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/settings_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="-4dp"
+                    android:background="@drawable/shape_ed_txt_chat"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/settings_apply_user"
+                    android:layout_width="260dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/blue"
+                    android:fontFamily="@font/readex_pro"
+                    android:text="@string/apply"
+                    android:textSize="19sp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/readex_pro_bold"
+                    android:text="@string/menu_chats"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F7F7F8"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/settings_message_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="5dp"
+                        app:cardBackgroundColor="@color/light_grey"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="6dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/settings_message_text_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/readex_pro"
+                                    android:maxWidth="215dp"
+                                    android:text="This plase text"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
+
+                                <ImageView
+                                    android:id="@+id/message_check_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginStart="2dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:background="@drawable/vc_chek_1"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/settings_message_time_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="1dp"
+                                android:layout_marginBottom="2dp"
+                                android:fontFamily="@font/readex_pro_light"
+                                android:gravity="bottom"
+                                android:text="12:30"
+                                android:textColor="@color/dark"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/settings_message_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="4dp"
+                            app:cardBackgroundColor="@color/light_blue"
+                            android:orientation="vertical"
+                            app:cardCornerRadius="6dp"
+                            app:cardElevation="4dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="6dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_marginVertical="5dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/settings_message_text_2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/readex_pro"
+                                        android:maxWidth="215dp"
+                                        android:text="This plase text"
+                                        android:textColor="@color/black"
+                                        android:textSize="16sp" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/settings_message_time_2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="1dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:fontFamily="@font/readex_pro_light"
+                                    android:gravity="bottom"
+                                    android:text="12:30"
+                                    android:textColor="@color/dark"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:id="@+id/settings_message_check_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginStart="2dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:background="@drawable/vc_chek_1" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/settings_message_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="5dp"
+                        app:cardBackgroundColor="@color/light_grey"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="6dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/settings_message_text_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/readex_pro"
+                                    android:maxWidth="215dp"
+                                    android:text="This plase text"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
+
+                                <ImageView
+                                    android:id="@+id/message_check_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginStart="2dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:background="@drawable/vc_chek_1"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/settings_message_time_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="1dp"
+                                android:layout_marginBottom="2dp"
+                                android:fontFamily="@font/readex_pro_light"
+                                android:gravity="bottom"
+                                android:text="12:30"
+                                android:textColor="@color/dark"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/readex_pro"
+                        android:text="@string/textSize"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/settings_textSize"
+                        android:layout_width="150dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="-4dp"
+                        android:background="@drawable/shape_ed_txt_chat"
+                        android:paddingStart="10dp"
+                        android:text="16"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/readex_pro"
+                        android:text="@string/textColor"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/settings_text_color"
+                        android:layout_width="150dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="-4dp"
+                        android:background="@drawable/shape_ed_txt_chat"
+                        android:paddingStart="10dp"
+                        android:text="#BCBDC0"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/readex_pro"
+                        android:text="@string/color_m"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/settings_text_m_color"
+                        android:layout_width="150dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="-4dp"
+                        android:background="@drawable/shape_ed_txt_chat"
+                        android:paddingStart="10dp"
+                        android:text="#ADEBFF"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/readex_pro"
+                        android:text="@string/color_y"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/settings_text_y_color"
+                        android:layout_width="150dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="-4dp"
+                        android:background="@drawable/shape_ed_txt_chat"
+                        android:paddingStart="10dp"
+                        android:text="#BCBDC0"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/settings_apply_chat"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/blue"
+                android:fontFamily="@font/readex_pro"
+                android:text="@string/apply"
+                android:textSize="19sp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,11 +6,16 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -49,6 +54,13 @@ class ProfileFragment : Fragment() {
 
         binding.lnProfileLanguage.setOnClickListener { chooseLanguage(inflater.context, it) }
         binding.lnProfileAskAdmin.setOnClickListener { askAdmin(inflater.context) }
+        binding.lnProfileStatistics.setOnClickListener {Toast.makeText(inflater.context, getString(R.string.development), Toast.LENGTH_SHORT).show() }
+        binding.lnProfileSettings.setOnClickListener {
+            val intent = Intent(inflater.context, ProfileSettingsActivity::class.java)
+            intent.putExtra("username", binding.tvProfileUsername.text.toString())
+            inflater.context.startActivity(intent)
+        }
+        binding.imProfileAva.setOnClickListener { chooseAva(inflater) }
 
         return binding.root
     }
@@ -60,6 +72,7 @@ class ProfileFragment : Fragment() {
 
     fun init(inflater: LayoutInflater){
         setName()
+        loadAva()
         languagePreferences = inflater.context.getSharedPreferences("language", Context.MODE_PRIVATE)
     }
 
@@ -90,21 +103,15 @@ class ProfileFragment : Fragment() {
         alert.create().show()
     }
 
-    fun setLastEntrance(){
-        val date = getCurrentDate()
-        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
-            .child("status").setValue(date)
+    fun askAdmin(context: Context){
+        createChat(context, "1l49RmrCccRAVyrjCXq2p8gU8Wm2")
+        val intent = Intent(context.applicationContext, ChatActivity::class.java)
+
+        val id = FirebaseAuth.getInstance().currentUser!!.uid.toString()
+        intent.putExtra("chat_id", generateChatId("1l49RmrCccRAVyrjCXq2p8gU8Wm2", id))
+        context.startActivity(intent)
     }
 
-    fun getCurrentDate():String{
-        val format = SimpleDateFormat("HH:mm dd.MM.yy")
-        val date = format.format(Date().time)
-        return date
-    }
-
-
-
-    @SuppressLint("MissingInflatedId")
     fun chooseLanguage(context: Context, v: View?) {
         val view: View = LayoutInflater.from(context).inflate(R.layout.alert_choose_langusge, null)
         val ru_B = view.findViewById<RadioButton>(R.id.radioB_ru)
@@ -146,13 +153,58 @@ class ProfileFragment : Fragment() {
         alertDialog.create().show()
     }
 
-    fun askAdmin(context: Context){
-        createChat(context, "oCUUSPWvD7aUOTiX4QeeBWXIywm2")
-        val intent = Intent(context.applicationContext, ChatActivity::class.java)
+    fun chooseAva(inflater: LayoutInflater){
+        val view = LayoutInflater.from(inflater.context).inflate(R.layout.alert_choose_ava, null)
 
-        val id = FirebaseAuth.getInstance().currentUser!!.uid.toString()
-        intent.putExtra("chat_id", generateChatId("oCUUSPWvD7aUOTiX4QeeBWXIywm2", id))
-        context.startActivity(intent)
+        val im_1 = view.findViewById<ImageButton>(R.id.alert_choose_1)
+        val im_2 = view.findViewById<ImageButton>(R.id.alert_choose_3)
+        val im_3 = view.findViewById<ImageButton>(R.id.alert_choose_2)
+        val im_4 = view.findViewById<ImageButton>(R.id.alert_choose_4)
+
+        im_1.setOnClickListener { setAva(1) }
+        im_2.setOnClickListener { setAva(2) }
+        im_3.setOnClickListener { setAva(3) }
+        im_4.setOnClickListener { setAva(4) }
+
+        AlertDialog.Builder(inflater.context).setView(view).create().show()
     }
+    fun setAva(imageId: Int){
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("profileImage").setValue(imageId)
+
+        when(imageId){
+            1 -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_1)
+            2 -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_2)
+            3 -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_3)
+            4 -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_4)
+        }
+    }
+    fun loadAva(){
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("profileImage").addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    when(snapshot.value.toString()){
+                        "1" -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_1)
+                        "2" -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_2)
+                        "3" -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_3)
+                        "4" -> binding.imProfileAva.setBackgroundResource(R.drawable.png_animal_4)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
+    fun setLastEntrance(){
+        val date = getCurrentDate()
+        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .child("status").setValue(date)
+    }
+    fun getCurrentDate():String{
+        val format = SimpleDateFormat("HH:mm dd.MM.yy")
+        val date = format.format(Date().time)
+        return date
+    }
+
 
 }

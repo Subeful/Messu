@@ -33,23 +33,23 @@ class NewChatFragment : Fragment() {
 
         val listUsers = ArrayList<UserModel>()
 
-        FirebaseDatabase.getInstance().getReference().child("Users")
-            .addValueEventListener(object : ValueEventListener {
+        FirebaseDatabase.getInstance().getReference().child("Users").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.childrenCount.toInt() == 0) return
+                    val uid = FirebaseAuth.getInstance().currentUser!!.uid
+
                     for (user in snapshot.children) {
-                        val name = user.child("username").getValue().toString()
-                        val id = user.child("id").getValue().toString()
-                        val profileImage = user.child("image").getValue().toString()
-                        val status = user.child("status").getValue().toString()
-                        if (!id.equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                        val id = user.child("id").value.toString()
+                        val name = user.child("username").value.toString()
+                        val profileImage = user.child("profileImage").value.toString()
+                        val status = user.child("status").value.toString()
+                        if(id == null || uid == null) return
+                        if (!id.equals(uid))
                             listUsers.add(UserModel(id, name , profileImage, status))
-                        }
+
                     }
                     val rv = binding.rvNewChat
-                    rv.addItemDecoration(
-                        DividerItemDecoration(context,
-                            DividerItemDecoration.VERTICAL)
-                    )
+                    rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
                     rv.adapter = NewChatsAdapter(context, listUsers)
                 }
                 override fun onCancelled(error: DatabaseError) {

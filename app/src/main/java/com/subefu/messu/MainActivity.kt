@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), SetFragment, UpdateFragment {
     lateinit var botNavMain: BottomNavigationView
 
     lateinit var language: SharedPreferences
+    lateinit var configChats: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +70,8 @@ class MainActivity : AppCompatActivity(), SetFragment, UpdateFragment {
 
         language = getSharedPreferences("langusge", MODE_PRIVATE)
         language.edit().putString("language", "en").apply()
+
+        configChats = getSharedPreferences("configChats", MODE_PRIVATE)
     }
 
     fun setFragment(fragment: Fragment){ supportFragmentManager.beginTransaction().replace(binding.frameMain.id, fragment).commit() }

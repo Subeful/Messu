@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Messu"
         tools:targetApi="31">
         <activity
+            android:name=".screen.bot_menu.profile.ProfileSettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.chat.ChatActivity"
             android:exported="false" />
         <activity

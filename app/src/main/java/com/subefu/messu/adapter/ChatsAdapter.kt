@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.subefu.messu.R
+import com.subefu.messu.adapter.NewChatsAdapter.UserChatViewHolder
 import com.subefu.messu.screen.chat.ChatActivity
 import com.subefu.messu.utils.ChatModel
 import com.subefu.messu.utils.ChatUtil.generateChatId
@@ -33,8 +34,8 @@ class ChatsAdapter(val context: Context?, val listChats: ArrayList<ChatModel>)
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
         holder.chatName.text = listChats[position].chatName
         setLastMessageAndTime(holder, position)
+        setAva(holder, position)
         setNoLookCount(holder, position)
-
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("chat_id", listChats[position].id)
@@ -45,6 +46,22 @@ class ChatsAdapter(val context: Context?, val listChats: ArrayList<ChatModel>)
             true
         }
     }
+    fun setAva(holder: ChatsViewHolder, position: Int){
+        FirebaseDatabase.getInstance().getReference().child("Users").child(listChats[position].id_2)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    when(snapshot.child("profileImage").value.toString()){
+                        "1" -> holder.ava.setBackgroundResource(R.drawable.png_animal_1)
+                        "2" -> holder.ava.setBackgroundResource(R.drawable.png_animal_2)
+                        "3" -> holder.ava.setBackgroundResource(R.drawable.png_animal_3)
+                        "4" -> holder.ava.setBackgroundResource(R.drawable.png_animal_4)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
     fun delete(position: Int){
         val alert = AlertDialog.Builder(context!!)
             .setTitle("Delete this chat?")
@@ -111,11 +128,13 @@ class ChatsAdapter(val context: Context?, val listChats: ArrayList<ChatModel>)
         var chatMessage: TextView
         var chatTime: TextView
         var chatCount: TextView
+        var ava: ImageView
         init {
             chatName = view.findViewById(R.id.model_chat_name)
             chatMessage = view.findViewById(R.id.model_chat_message)
             chatTime = view.findViewById(R.id.model_chat_message_time)
             chatCount = view.findViewById(R.id.model_chat_message_count)
+            ava = view.findViewById(R.id.model_chat_ava)
         }
     }
 }

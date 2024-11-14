@@ -40,4 +40,14 @@
     <string name="no">No</string>
 
     <string name="create_chat">Chat created</string>
+    <string name="development">In development...</string>
+    <string name="errorValue">Incorrect data entered</string>
+
+    <string name="apply">Apply</string>
+    <string name="user">User</string>
+    <string name="textSize">Text size</string>
+    <string name="textColor">Text color</string>
+    <string name="color_m">Color mine</string>
+    <string name="color_y">Color your</string>
+
 </resources>

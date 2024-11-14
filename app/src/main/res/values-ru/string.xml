@@ -40,4 +40,13 @@
     <string name="no">Нет</string>
 
     <string name="create_chat">Чат создан</string>
+    <string name="development">В разработке...</string>
+    <string name="errorValue">Введены некорректные значения</string>
+
+    <string name="apply">Применить</string>
+    <string name="user">Пользователь</string>
+    <string name="textSize">Размер текста</string>
+    <string name="textColor">Цвет текста</string>
+    <string name="color_m">Мой цвет</string>
+    <string name="color_y">Цвет собеседника</string>
 </resources>
